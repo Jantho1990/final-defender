@@ -2,9 +2,13 @@ import Phaser from 'phaser'
 import logoImg from "../assets/logo.png";
 // import Player from '../entities/player'
 import Bullet from '../entities/Bullet'
+import Enemy from '../entities/Enemy'
+
+import EnemyFactory from '../factories/EnemyFactory'
 
 import playerImg from '../assets/img/spaceship.png'
 import bulletImg from '../assets/img/laser-bullet.png'
+import enemyImg from '../assets/img/ufo.png'
 
 export default class GameScene extends Phaser.Scene {
     constructor () {
@@ -12,19 +16,29 @@ export default class GameScene extends Phaser.Scene {
     }
 
     preload() {
-      this.load.image("logo", logoImg);
+      // this.load.image("logo", logoImg);
       this.load.image('spaceship', playerImg)
       this.load.image('bullet', bulletImg)
+      this.load.image('enemy', enemyImg)
     }
 
     create() {
-      const logo = this.add.image(400, 150, "logo");
+      // const logo = this.add.image(400, 150, "logo");
       
+      // Bullets container
       this.bullets = this.add.group({
         classType: Bullet,
         runChildUpdate: true
       })
       this.lastFired = 0
+
+      // Enemies container
+      this.enemies = this.add.group({
+        classType: Enemy,
+        runChildUpdate: true
+      })
+      this.enemiesFactory = new EnemyFactory(this.enemies)
+        .create(20)
       
       // this.add.sprite()
       // this.player = new Player(this, { x: 100, y: 100 })
@@ -34,14 +48,14 @@ export default class GameScene extends Phaser.Scene {
 
       this.cursors = this.input.keyboard.createCursorKeys()
 
-      this.tweens.add({
+      /* this.tweens.add({
         targets: logo,
         y: 450,
         duration: 2000,
         ease: "Power2",
         yoyo: true,
         loop: -1
-      });
+      }); */
     }
 
     update (time, delta) {

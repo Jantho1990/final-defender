@@ -1,16 +1,22 @@
 import Enemy from '../entities/Enemy'
 
 export default class EnemyFactory {
-  constructor (container) {
+  constructor ({
+    container,
+    boundaries = { x: [100, 500], y: [100, 500]}
+  }) {
     this.container = container
+    this.boundaries = boundaries
 
     return this
   }
 
   create (amt = 20) {
+    const { x: [ xLower, xUpper ], y: [ yLower, yUpper ] } = this.boundaries
+    
     for (let i = 0; i < amt; i++) {
-      const x = Phaser.Math.Between(200, 500)
-      const y = Phaser.Math.Between(100, 300)
+      const x = Phaser.Math.Between(xLower, xUpper)
+      const y = Phaser.Math.Between(yLower, yUpper)
   
       const enemy = this.container.get()
       enemy.setActive(true)

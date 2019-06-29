@@ -17,7 +17,6 @@ export default class Bullet extends Phaser.GameObjects.Image {
   }
 
   update (time, delta) {
-    console.log('delta bullet:', delta)
     this.x += this.speed * delta
 
     this.born += delta

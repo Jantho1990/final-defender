@@ -37,7 +37,13 @@ export default class GameScene extends Phaser.Scene {
         classType: Enemy,
         runChildUpdate: true
       })
-      this.enemiesFactory = new EnemyFactory(this.enemies)
+      this.enemiesFactory = new EnemyFactory({
+        container: this.enemies,
+        boundaries: {
+          x: [this.game.config.width + 100, this.game.config.width + 200],
+          y: [50, this.game.config.height - 50]
+        }
+      })
         .create(20)
       
       // this.add.sprite()

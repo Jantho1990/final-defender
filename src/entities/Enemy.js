@@ -16,7 +16,7 @@ export default class Enemy extends Phaser.GameObjects.Image {
   }
 
   update (time, delta) {
-    this.x -= this.speed * delta
+    this.y += this.speed * delta
 
     this.born += delta
   }

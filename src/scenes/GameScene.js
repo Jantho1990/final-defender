@@ -40,8 +40,8 @@ export default class GameScene extends Phaser.Scene {
       this.enemiesFactory = new EnemyFactory({
         container: this.enemies,
         boundaries: {
-          x: [this.game.config.width + 100, this.game.config.width + 200],
-          y: [50, this.game.config.height - 50]
+          x: [50, this.game.config.width - 50],
+          y: [-200, -100]
         }
       })
         .create(20)
@@ -49,7 +49,9 @@ export default class GameScene extends Phaser.Scene {
       // this.add.sprite()
       // this.player = new Player(this, { x: 100, y: 100 })
       // console.log(this.player)
-      this.player = this.impact.add.sprite(100, 100, 'spaceship')
+      const { height: gameHeight, width: gameWidth } = this.game.config
+      console.log(gameHeight, gameWidth)
+      this.player = this.impact.add.sprite(gameWidth / 2, gameHeight - 100, 'spaceship')
       this.player.setMaxVelocity(1000).setFriction(800, 600).setPassiveCollision()
 
       this.cursors = this.input.keyboard.createCursorKeys()

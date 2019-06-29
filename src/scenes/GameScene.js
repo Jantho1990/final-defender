@@ -67,7 +67,6 @@ export default class GameScene extends Phaser.Scene {
         let bullet = this.bullets.get()
         bullet.setActive(true)
         bullet.setVisible(true)
-        console.log(bullet)
 
         if (bullet) {
           bullet.fire(player)
